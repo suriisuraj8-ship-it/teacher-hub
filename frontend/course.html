@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Courses - Teacher Learning Hub</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;min-height:100vh;padding:40px 6%;}
+h1{text-align:center;font-size:40px;margin-bottom:30px;background:linear-gradient(120deg,#ff8c00,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.back-btn{position:fixed;top:18px;left:18px;padding:10px 18px;border-radius:8px;border:none;background:#111;color:#fff;cursor:pointer;z-index:120;}
+.course-section{margin-bottom:50px;}
+.course-section h2{font-size:28px;color:#00c6ff;border-left:5px solid #00c6ff;padding-left:10px;margin-bottom:20px;}
+.course{background:rgba(255,255,255,0.1);padding:20px;margin-bottom:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.3);transition:0.3s;}
+.course:hover{background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#000;transform:scale(1.03);}
+.course h3{font-size:26px;font-weight:700;margin-bottom:10px;cursor:pointer;text-decoration:underline;transition:0.3s;}
+.course p{font-size:20px;line-height:1.5;color:#f0f0f0;}
+@media (max-width:480px){ h1{ font-size:30px; } .course h3{ font-size:22px; } .course p{ font-size:18px; } .back-btn{ top:10px; left:10px; padding:8px 12px; } }
+</style>
+</head>
+<body>
+<button class="back-btn" onclick="goBack()">Back</button>
+<h1>Available Courses</h1>
+
+<div class="course-section">
+  <h2>High-Level Courses</h2>
+  <div class="course" onclick="location.href='c.html'"><h3>C Language</h3><p>Learn the basics of programming with C — understand loops, functions, arrays, and core logic behind every language.</p></div>
+  <div class="course" onclick="location.href='cpp.html'"><h3>C++ Programming</h3><p>Dive deeper into object-oriented programming with C++. Build efficient, real-world applications with classes and objects.</p></div>
+  <div class="course" onclick="location.href='java.html'"><h3>Java Programming</h3><p>Master Java to develop strong backend systems, Android apps, and enterprise-level projects using OOP principles.</p></div>
+  <div class="course" onclick="location.href='python.html'"><h3>Python Development</h3><p>Python is simple yet powerful — explore automation, AI, web development, and data science with real-world examples.</p></div>
+</div>
+
+<div class="course-section">
+  <h2>Basic Courses</h2>
+  <div class="course" onclick="location.href='pgdca.html'"><h3>PGDCA</h3><p>Post Graduate Diploma in Computer Applications gives you a solid foundation in software, database, and system operations.</p></div>
+  <div class="course" onclick="location.href='bcs.html'"><h3>BCS</h3><p>Learn the fundamentals of computer science — from logic design to programming and data management essentials.</p></div>
+  <div class="course" onclick="location.href='tally.html'"><h3>Tally</h3><p>Understand accounting software with Tally — learn GST, inventory, payroll, and financial report creation.</p></div>
+</div>
+
+<script>
+function getCurrentUser(){
+  try { return JSON.parse(localStorage.getItem('teacherHubUser')||'null'); } catch(e){ return null; }
+}
+
+function goBack(){ location.href = 'indexL.html'; }
+
+/* protect page: if not logged in redirect to login page */
+document.addEventListener('DOMContentLoaded', () => {
+  const u = getCurrentUser();
+  if(!u || !u.email){
+    // not logged in — redirect to login
+    alert('You must be logged in to view courses.');
+    location.href = 'login.html';
+  }
+});
+</script>
+</body>
+</html>
+
