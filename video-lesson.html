@@ -3,160 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Learning Hub - Course</title>
+<title>Course Video</title>
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-
-  .content-wrapper {
-    flex: 1;
-    display: flex;
-    overflow: hidden;
-  }
-
-  /* Sidebar */
-  .sidebar {
-    width: 220px;
-    background: #111;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 10px;
-    overflow-y: auto;
-  }
-
-  .lesson-btn {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #222;
-    color: #fff;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-
-  .lesson-btn:hover, .lesson-btn.active {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    color: #fff;
-  }
-
-  /* Video container */
-  .video-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-  }
-
-  iframe {
-    width: 100%;
-    max-width: 800px;
-    height: 45vh;
-    border: none;
-    border-radius: 12px;
-  }
-
-  /* Download button at bottom center */
-  .download-container {
-    text-align: center;
-    padding: 15px;
-    background: #111;
-  }
-
-  .download-btn {
-    padding: 14px 28px;
-    font-size: 18px;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    color: #fff;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-
-  .download-btn:hover {
-    transform: scale(1.05);
-  }
-
-  /* Responsive for mobile */
-  @media (max-width: 768px){
-    .content-wrapper {
-      flex-direction: column;
-    }
-    .sidebar {
-      width: 100%;
-      flex-direction: row;
-      overflow-x: auto;
-    }
-    .lesson-btn {
-      flex: 1;
-      min-width: 120px;
-      text-align: center;
-    }
-    iframe {
-      height: 35vh;
-    }
-  }
+  body { margin:0; font-family:'Poppins',sans-serif; background:#000; color:#fff; display:flex; flex-direction:column; align-items:center; }
+  header { width:100%; padding:12px 20px; background:#111; display:flex; justify-content:space-between; align-items:center; }
+  #userNameArea { color:#ffd47a; font-weight:700; }
+  #signOutBtn { background:#ff4444; border:none; padding:8px 16px; color:#fff; cursor:pointer; border-radius:8px; }
+  .container { width:100%; max-width:800px; padding:20px; display:flex; flex-direction:column; align-items:center; }
+  .video-frame { width:100%; height:50vh; border:none; }
+  #downloadBtn { margin-top:20px; padding:12px 24px; font-size:18px; border:none; border-radius:36px; cursor:pointer; background:linear-gradient(135deg,#ff7e5f,#feb47b); color:#fff; }
+  .lesson-selector { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px; }
+  .lesson-btn { padding:8px 16px; border:none; border-radius:20px; cursor:pointer; background:#0072ff; color:#fff; }
+  @media(max-width:480px){ .video-frame{height:40vh;} #downloadBtn{width:80%;} }
 </style>
 </head>
 <body>
 
-<div class="content-wrapper">
-  <!-- Sidebar with lessons -->
-  <div class="sidebar" id="lessonList">
-    <button class="lesson-btn active" data-video="https://www.youtube.com/embed/EjavYOFoJJ0">Lesson 1</button>
-    <button class="lesson-btn" data-video="https://www.youtube.com/embed/E6jtj-7xJoA">Lesson 2</button>
-    <button class="lesson-btn" data-video="https://www.youtube.com/embed/qcEBXrqFLe8">Lesson 3</button>
-    <button class="lesson-btn" data-video="https://www.youtube.com/embed/i3SWaOhjPCY">Lesson 4</button>
-    <button class="lesson-btn" data-video="https://www.youtube.com/embed/HucJhUkDJuk">Lesson 5</button>
- 
-</div>
+<header>
+  <div id="userNameArea"></div>
+  <button id="signOutBtn" style="display:none;">Sign Out</button>
+</header>
 
-  <!-- Video display -->
-  <div class="video-container">
-    <iframe id="mainVideo" src="https://www.youtube.com/embed/EjavYOFoJJ0" allowfullscreen></iframe>
-  </div>
-</div>
-
-<!-- Download button -->
-<div class="download-container">
-  <button class="download-btn" onclick="handleDownload()">Download Notes</button>
+<div class="container">
+  <div class="lesson-selector" id="lessonSelector"></div>
+  <iframe id="videoFrame" class="video-frame" src="" allowfullscreen></iframe>
+  <button id="downloadBtn">Download PDF</button>
 </div>
 
 <script>
-  const lessonButtons = document.querySelectorAll('.lesson-btn');
-  const mainVideo = document.getElementById('mainVideo');
-
-  lessonButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active from all buttons
-      lessonButtons.forEach(b => b.classList.remove('active'));
-      // Add active to clicked button
-      btn.classList.add('active');
-      // Change video
-      const videoURL = btn.getAttribute('data-video');
-      mainVideo.src = videoURL;
-    });
-  });
-
-  function handleDownload(){
-    // Payment check logic can go here
-    alert("Payment required to unlock notes. Once successful, redirect to PDF page.");
-    // Example: after payment success
-    // window.location.href = "notes.html";
+// Courses and lessons
+const courses = {
+  c: {
+    name: 'C Language',
+    lessons: [
+      { title: 'Lesson 1', video: 'https://www.youtube.com/embed/EjavYOFoJJ0' },
+      { title: 'Lesson 2', video: 'https://www.youtube.com/embed/E6jtj-7xJoA' }
+    ],
+    pdf: 'pdfs/c-course.pdf'
+  },
+  cpp: {
+    name: 'C++ Language',
+    lessons: [
+      { title: 'Lesson 1', video: 'https://www.youtube.com/embed/Cyha_W_gPdg'  },
+      { title: 'Lesson 2', video: 'https://www.youtube.com/embed/7EW297QuJl0' }
+    ],
+    pdf: 'pdfs/cpp-course.pdf'
+  },
+  java: {
+    name: 'Java',
+    lessons: [
+      { title: 'Lesson 1', video: 'https://www.youtube.com/embed/RJ733wzbNoA' },
+      { title: 'Lesson 2', video: 'https://www.youtube.com/embed/Byf6xOYdNcw' }
+    ],
+    pdf: 'pdfs/java-course.pdf'
+  },
+  python: {
+    name: 'Python',
+    lessons: [
+        { title: 'Lesson 1', video: 'https://www.youtube.com/embed/8c74mXV2lJ0' },
+      { title: 'Lesson 2', video: 'https://www.youtube.com/embed/jr1FF9-VAJs' } ],
+    pdf: 'pdfs/python-course.pdf'
+  },
+  tally: {
+    name: 'Tally',
+    lessons: [
+      { title: 'Lesson 1', video: 'https://www.youtube.com/embed/VIDEO_TALLY_1' }
+    ],
+    pdf: 'pdfs/tally-course.pdf'
+  },
+  bcs: {
+    name: 'BCS',
+    lessons: [
+      { title: 'Lesson 1', video: 'https://www.youtube.com/embed/VIDEO_BCS_1' }
+    ],
+    pdf: 'pdfs/bcs-course.pdf'
+  },
+  pgdca: {
+    name: 'PGDCA',
+    lessons: [
+      { title: 'Lesson 1', video: 'https://www.youtube.com/embed/VIDEO_PGDCA_1' }
+    ],
+    pdf: 'pdfs/pgdca-course.pdf'
   }
+};
+
+// Get course from URL
+const urlParams = new URLSearchParams(window.location.search);
+const currentCourse = urlParams.get('course') || 'c';
+const courseData = courses[currentCourse];
+
+// Elements
+const videoFrame = document.getElementById('videoFrame');
+const lessonSelector = document.getElementById('lessonSelector');
+const downloadBtn = document.getElementById('downloadBtn');
+
+// Populate lessons
+courseData.lessons.forEach((lesson, index) => {
+  const btn = document.createElement('button');
+  btn.className = 'lesson-btn';
+  btn.textContent = lesson.title;
+  btn.addEventListener('click', () => {
+    videoFrame.src = lesson.video;
+  });
+  lessonSelector.appendChild(btn);
+});
+
+// Set default first lesson
+videoFrame.src = courseData.lessons[0].video;
+
+// PDF download logic
+downloadBtn.addEventListener('click', () => {
+  const userPaid = JSON.parse(localStorage.getItem(`paid_${currentCourse}`));
+  if(userPaid){
+    window.open(courseData.pdf, '_blank');
+  } else {
+    alert('Please complete payment to unlock PDF.');
+    // Integrate payment gateway here
+  }
+});
+
+// User status & sign out
+function getCurrentUser(){ const raw = localStorage.getItem('teacherHubUser'); return raw ? JSON.parse(raw) : null; }
+function showUser(){ 
+  const u = getCurrentUser();
+  const userArea = document.getElementById('userNameArea');
+  const signOutBtn = document.getElementById('signOutBtn');
+  if(u){ userArea.textContent = `Welcome, ${u.name}`; signOutBtn.style.display='inline-block'; }
+  else{ userArea.textContent=''; signOutBtn.style.display='none'; }
+}
+document.getElementById('signOutBtn').addEventListener('click', () => {
+  localStorage.removeItem('teacherHubUser'); 
+  showUser();
+  alert('You have signed out');
+});
+document.addEventListener('DOMContentLoaded', showUser);
 </script>
 
 </body>
 </html>
-
