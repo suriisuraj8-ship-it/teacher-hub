@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Learning Hub - Course</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    overflow-y: auto;
+  }
+
+  .lesson-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .lesson-btn:hover, .lesson-btn.active {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+  }
+
+  /* Video container */
+  .video-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+  iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 45vh;
+    border: none;
+    border-radius: 12px;
+  }
+
+  /* Download button at bottom center */
+  .download-container {
+    text-align: center;
+    padding: 15px;
+    background: #111;
+  }
+
+  .download-btn {
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .download-btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Responsive for mobile */
+  @media (max-width: 768px){
+    .content-wrapper {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+    }
+    .lesson-btn {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+    iframe {
+      height: 35vh;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="content-wrapper">
+  <!-- Sidebar with lessons -->
+  <div class="sidebar" id="lessonList">
+    <button class="lesson-btn active" data-video="https://www.youtube.com/embed/EjavYOFoJJ0">Lesson 1</button>
+    <button class="lesson-btn" data-video="https://www.youtube.com/embed/E6jtj-7xJoA">Lesson 2</button>
+    <button class="lesson-btn" data-video="https://www.youtube.com/embed/qcEBXrqFLe8">Lesson 3</button>
+    <button class="lesson-btn" data-video="https://www.youtube.com/embed/i3SWaOhjPCY">Lesson 4</button>
+    <button class="lesson-btn" data-video="https://www.youtube.com/embed/HucJhUkDJuk">Lesson 5</button>
+ 
+</div>
+
+  <!-- Video display -->
+  <div class="video-container">
+    <iframe id="mainVideo" src="https://www.youtube.com/embed/EjavYOFoJJ0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Download button -->
+<div class="download-container">
+  <button class="download-btn" onclick="handleDownload()">Download Notes</button>
+</div>
+
+<script>
+  const lessonButtons = document.querySelectorAll('.lesson-btn');
+  const mainVideo = document.getElementById('mainVideo');
+
+  lessonButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active from all buttons
+      lessonButtons.forEach(b => b.classList.remove('active'));
+      // Add active to clicked button
+      btn.classList.add('active');
+      // Change video
+      const videoURL = btn.getAttribute('data-video');
+      mainVideo.src = videoURL;
+    });
+  });
+
+  function handleDownload(){
+    // Payment check logic can go here
+    alert("Payment required to unlock notes. Once successful, redirect to PDF page.");
+    // Example: after payment success
+    // window.location.href = "notes.html";
+  }
+</script>
+
+</body>
+</html>
+
