@@ -34,7 +34,7 @@ async function register(){
   if(!name || !email || !password){ alert("Please fill all fields"); return; }
 
   try{
-const res = await fetch('https://teacher-hub-1aas.onrender.com/register', {
+    const res = await fetch('https://teacher-hub-1aas.onrender.com/register',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({ name, email, password })
@@ -44,7 +44,10 @@ const res = await fetch('https://teacher-hub-1aas.onrender.com/register', {
       localStorage.setItem('teacherHubUser', JSON.stringify(data.user));
       window.location.href = 'indexL.html';
     } else alert(data.message || 'Registration failed');
-  }catch(err){ console.error(err); alert('Error connecting to server'); }
+  }catch(err){ 
+      console.error(err); 
+      alert('Error connecting to server'); 
+  }
 }
 </script>
 </body>
