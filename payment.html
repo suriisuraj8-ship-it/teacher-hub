@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Payment</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      margin: 0;
+      color: #fff;
+    }
+
+    .payment-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 350px;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    button {
+      background: #fff;
+      color: #0077ff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0077ff;
+      color: #fff;
+    }
+
+    #formBox {
+      display: none;
+      margin-top: 15px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 90%;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-box">
+    <h2>Pay ₹499 for Full Course Access</h2>
+    <p>Scan this QR to pay securely via UPI</p>
+    
+    <!-- Replace with your UPI QR -->
+    <img src="your_qr_image.png" alt="UPI Payment QR" />
+
+    <button onclick="showForm()">I've Paid</button>
+
+    <div id="formBox">
+      <p>Enter Transaction ID (UTR):</p>
+      <input type="text" id="txnId" placeholder="Enter Transaction ID" />
+      <button onclick="verifyPayment()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    function showForm() {
+      document.getElementById("formBox").style.display = "block";
+    }
+
+    function verifyPayment() {
+      const txn = document.getElementById("txnId").value.trim();
+      if (txn.length > 5) {
+        alert("Payment submitted for verification. Redirecting...");
+        window.location.href = "thankyou.html"; // or course-access.html
+      } else {
+        alert("Please enter a valid Transaction ID!");
+      }
+    }
+  </script>
+</body>
+</html>

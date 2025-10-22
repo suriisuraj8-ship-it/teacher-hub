@@ -31,7 +31,7 @@ async function login(){
   if(!email || !password){ alert("Please fill all fields"); return; }
 
   try{
-    const res = await fetch('http://localhost:5000/login',{
+    const res = await fetch('https://teacher-hub-1aas.onrender.com/login', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({ email, password })

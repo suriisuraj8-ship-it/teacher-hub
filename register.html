@@ -34,7 +34,7 @@ async function register(){
   if(!name || !email || !password){ alert("Please fill all fields"); return; }
 
   try{
-    const res = await fetch('http://localhost:5000/register',{
+const res = await fetch('https://teacher-hub-1aas.onrender.com/register', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({ name, email, password })
