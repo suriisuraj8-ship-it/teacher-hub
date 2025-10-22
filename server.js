@@ -5,24 +5,29 @@ import cors from "cors";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config(); // Load .env variables
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // --- MongoDB Connection ---
-mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/teacherHub", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB Connection Error:", err));
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is not defined in .env");
+  process.exit(1);
+}
+
+mongoose
+  .connect(MONGO_URI) // Mongoose 7+ does not need options
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // --- User Schema ---
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: { type: String, unique: true },
-  password: String
+  name: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
 });
 
 const User = mongoose.model("User", userSchema);
@@ -30,11 +35,13 @@ const User = mongoose.model("User", userSchema);
 // --- Register ---
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
-  if (!name || !email || !password) return res.json({ success: false, message: "All fields are required" });
+  if (!name || !email || !password)
+    return res.json({ success: false, message: "All fields are required" });
 
   try {
     const existing = await User.findOne({ email });
-    if (existing) return res.json({ success: false, message: "Email already registered" });
+    if (existing)
+      return res.json({ success: false, message: "Email already registered" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword });
@@ -50,7 +57,8 @@ app.post("/register", async (req, res) => {
 // --- Login ---
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) return res.json({ success: false, message: "All fields are required" });
+  if (!email || !password)
+    return res.json({ success: false, message: "All fields are required" });
 
   try {
     const user = await User.findOne({ email });
@@ -69,17 +77,18 @@ app.post("/login", async (req, res) => {
 // --- Reset Password ---
 app.post("/reset-password", async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
-  if (!email || !oldPassword || !newPassword) return res.json({ success: false, message: "All fields are required" });
+  if (!email || !oldPassword || !newPassword)
+    return res.json({ success: false, message: "All fields are required" });
 
   try {
     const user = await User.findOne({ email });
     if (!user) return res.json({ success: false, message: "User not found" });
 
     const match = await bcrypt.compare(oldPassword, user.password);
-    if (!match) return res.json({ success: false, message: "Old password is incorrect" });
+    if (!match)
+      return res.json({ success: false, message: "Old password is incorrect" });
 
-    const hashedNew = await bcrypt.hash(newPassword, 10);
-    user.password = hashedNew;
+    user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
 
     res.json({ success: true, message: "Password updated successfully" });
