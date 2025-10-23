@@ -34,7 +34,17 @@ body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidd
 .teacher-info h2{font-size:28px;font-weight:900;margin-bottom:6px;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;text-shadow:2px 2px 6px rgba(0,0,0,0.5);}
 .teacher-info p{font-size:15px;font-weight:700;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;text-shadow:1px 1px 3px rgba(0,0,0,0.4);margin:0;}
 .about{background:#000;color:#ddd;padding:80px 6%;text-align:center;}
-@media (max-width:480px){ .hero-content h1{ font-size:32px;} .hero-content p{ font-size:18px; max-width:300px;} .btn{ padding:10px 20px; font-size:16px;} .teacher-info h2{ font-size:24px;} .teacher-info p{ font-size:13px;} .teacher-info{ bottom:0; right:0; padding:10px 14px;} .about h3{ font-size:28px;} .about p{ font-size:18px; } .buttons{flex-direction:column;} }
+@media (max-width:480px){
+ .hero-content h1{ font-size:32px;}
+ .hero-content p{ font-size:18px; max-width:300px;}
+ .btn{ padding:10px 20px; font-size:16px;}
+ .teacher-info h2{ font-size:24px;}
+ .teacher-info p{ font-size:13px;}
+ .teacher-info{ bottom:0; right:0; padding:10px 14px;}
+ .about h3{ font-size:28px;}
+ .about p{ font-size:18px; }
+ .buttons{flex-direction:column;}
+}
 </style>
 </head>
 <body>
@@ -133,7 +143,14 @@ document.getElementById('signOutBtn').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
   showUserStatus();
 });
+
+// ✅ Fix: Always return to index.html on back navigation
+if (window.history && window.history.pushState) {
+  window.history.pushState(null, null, window.location.href);
+  window.onpopstate = function () {
+    window.location.href = 'index.html';
+  };
+}
 </script>
 </body>
 </html>
-

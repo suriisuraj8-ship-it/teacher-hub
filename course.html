@@ -1,84 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Courses - Teacher Learning Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Courses | Teacher Hub</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;min-height:100vh;padding:40px 6%;}
-h1{text-align:center;font-size:40px;margin-bottom:30px;background:linear-gradient(120deg,#ff8c00,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.back-btn{position:fixed;top:18px;left:18px;padding:10px 18px;border-radius:8px;border:none;background:#111;color:#fff;cursor:pointer;z-index:120;}
-.course-section{margin-bottom:50px;}
-.course-section h2{font-size:28px;color:#00c6ff;border-left:5px solid #00c6ff;padding-left:10px;margin-bottom:20px;}
-.course{background:rgba(255,255,255,0.1);padding:20px;margin-bottom:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.3);transition:0.3s;}
-.course:hover{background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#000;transform:scale(1.03);}
-.course h3{font-size:26px;font-weight:700;margin-bottom:10px;cursor:pointer;text-decoration:underline;transition:0.3s;}
-.course p{font-size:20px;line-height:1.5;color:#f0f0f0;}
-@media (max-width:480px){ h1{ font-size:30px; } .course h3{ font-size:22px; } .course p{ font-size:18px; } .back-btn{ top:10px; left:10px; padding:8px 12px; } }
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+}
+.header {
+  text-align:center;
+  padding:20px;
+  background:#111;
+  font-size:22px;
+  color:#00c6ff;
+  font-weight:600;
+}
+.back-btn{
+  position:fixed;
+  top:50px;
+  left:18px;
+  padding:12px 22px;
+  border-radius:8px;
+  border:none;
+  background:#111;
+  color:#fff;
+  font-size:18px;
+  font-weight:600;
+  cursor:pointer;
+  z-index:120;
+}
+.course-list {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+  padding:20px;
+}
+.course {
+  background:#111;
+  border-radius:12px;
+  padding:20px;
+  cursor:pointer;
+  transition:transform .2s ease;
+}
+.course:hover {
+  transform:scale(1.02);
+}
+.course h3 {
+  color:#00c6ff;
+}
+.course p {
+  color:#ccc;
+}
 </style>
 </head>
 <body>
-<button class="back-btn" onclick="goBack()">Back</button>
-<h1>Available Courses</h1>
+<div class="header">Available Courses</div>
+<button class="back-btn" onclick="goHome()">Back</button>
 
-<div class="course-section">
-  <h2>High-Level Courses</h2>
-  <div class="course" onclick="location.href='video-lesson.html?course=c'">
-  <h3>C Language</h3>
-  <p>Learn the basics of programming with C — understand loops, functions, arrays, and core logic behind every language.</p>
-</div>
-
-  <div class="course" onclick="location.href='video-lesson.html?course=cpp'">
-  <h3>C++ Language</h3>
-  <p>Learn C++ programming — dive into OOP concepts, classes, inheritance, and more advanced programming techniques.</p>
-</div>
-<div class="course" onclick="location.href='video-lesson.html?course=java'">
-  <h3>Java</h3>
-  <p>Master Java programming — learn syntax, OOP, collections, and develop real-world applications.</p>
-</div>
-
-<div class="course" onclick="location.href='video-lesson.html?course=python'">
-  <h3>Python</h3>
-  <p>Learn Python — from basics to advanced, including loops, functions, libraries, and real-world projects.</p>
-</div>
- </div>
-
-<div class="course-section">
-  <h2>Basic Courses</h2>
-  <div class="course" onclick="location.href='video-lesson.html?course=tally'">
-  <h3>Tally</h3>
-  <p>Learn Tally ERP — accounting, inventory management, GST, and practical business solutions.</p>
-</div>
-
-<div class="course" onclick="location.href='video-lesson.html?course=bcs'">
-  <h3>BCS</h3>
-  <p>Understand the BCS syllabus — basics of computing, programming logic, and software skills for exams.</p>
-</div>
-
-<div class="course" onclick="location.href='video-lesson.html?course=pgdca'">
-  <h3>PGDCA</h3>
-  <p>Learn PGDCA subjects — programming, database, web development, and practical computer applications.</p>
-</div>
+<div class="course-list">
+  <div class="course" onclick="openLesson('c')"><h3>C Language</h3><p>Learn programming basics using C language.</p></div>
+  <div class="course" onclick="openLesson('cpp')"><h3>C++</h3><p>Object-oriented programming concepts using C++.</p></div>
+  <div class="course" onclick="openLesson('java')"><h3>Java</h3><p>Master Java for application development.</p></div>
+  <div class="course" onclick="openLesson('python')"><h3>Python</h3><p>Learn Python and automation concepts.</p></div>
+  <div class="course" onclick="openLesson('tally')"><h3>Tally</h3><p>Accounting basics with Tally ERP.</p></div>
+  <div class="course" onclick="openLesson('bcs')"><h3>BCS</h3><p>Learn computer science fundamentals.</p></div>
+  <div class="course" onclick="openLesson('pgdca')"><h3>PGDCA</h3><p>Post Graduate Diploma in Computer Applications.</p></div>
 </div>
 
 <script>
-function getCurrentUser(){
-  try { return JSON.parse(localStorage.getItem('teacherHubUser')||'null'); } catch(e){ return null; }
+function goHome(){
+  window.location.href='index.html';
 }
 
-function goBack(){ location.href = 'indexL.html'; }
+function openLesson(course){
+  window.location.href=`video-lesson.html?course=${course}`;
+}
 
-/* protect page: if not logged in redirect to login page */
-document.addEventListener('DOMContentLoaded', () => {
-  const u = getCurrentUser();
-  if(!u || !u.email){
-    // not logged in — redirect to login
-    alert('You must be logged in to view courses.');
-    location.href = 'login.html';
-  }
-});
+// Handle browser or Android back button
+window.history.pushState(null, null, window.location.href);
+window.onpopstate = () => { window.location.href = 'index.html'; };
 </script>
 </body>
 </html>
-
