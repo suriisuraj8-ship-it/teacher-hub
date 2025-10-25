@@ -79,17 +79,15 @@ a{text-decoration:none;color:inherit;}
 .btn-secondary{background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
 .btn-danger{background:#ff4444;color:#fff;}
 
-/* Bottom Navigation as icons */
+/* Bottom Navigation as icons just below Get Started button */
 .bottom-nav{
-    position:fixed;
-    bottom:150px; /* 15× higher than original 10px */
-    left:0;
-    width:100%;
+    position:absolute; /* below hero content */
+    left:50%;
+    transform:translateX(-50%);
+    top:calc(50% + 50vh + 37px); /* paragraph + 1cm gap (~37px) */
     display:flex;
     justify-content:space-around;
-    background:rgba(0,0,0,0.9);
-    padding:6px 0;
-    box-shadow:0 -2px 10px rgba(0,0,0,0.5);
+    width:90%;
     z-index:100;
 }
 .bottom-nav button{
@@ -156,7 +154,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </section>
 
-<!-- Bottom Navigation -->
+<!-- Bottom Navigation just below Get Started -->
 <div class="bottom-nav">
   <button onclick="location.href='index.html'"><i class="fa fa-home"></i>Home</button>
   <button id="bottomCourseBtn"><i class="fa fa-book"></i>Course</button>
