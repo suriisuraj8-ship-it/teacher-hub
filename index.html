@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <title>Teacher Learning Hub</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
 /* Reset */
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -39,6 +40,9 @@ a{text-decoration:none;color:inherit;}
 .sidebar .submenu{display:none;flex-direction:column;gap:12px;margin-left:10px;}
 .sidebar .submenu button{border-radius:24px;font-size:16px;padding:10px 18px;}
 .sidebar .submenu.show{display:flex;}
+.sidebar-overlay{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:98;
+}
 
 /* Hero Section */
 .hero{
@@ -56,7 +60,7 @@ a{text-decoration:none;color:inherit;}
 .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.25);z-index:1;}
 .hero-content{
     position:relative;z-index:2;display:flex;flex-direction:column;gap:18px;align-items:flex-start;
-    margin-top:12%;
+    margin-top:18%; /* moved H1 further down */
 }
 .hero-content h1{
     font-size:36px;font-weight:800;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);
@@ -64,9 +68,9 @@ a{text-decoration:none;color:inherit;}
 }
 .hero-content p{
     font-size:20px;color:#f0f8ff;line-height:1.5;max-width:800px;word-wrap:break-word;text-shadow:1px 1px 5px rgba(0,0,0,0.5);
-    margin-top:35vh;
+    margin-top:40vh; /* paragraph moved further down */
 }
-.buttons{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.buttons{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;justify-content:center;}
 .btn{
     padding:12px 24px;font-size:18px;font-weight:700;border:none;border-radius:36px;
     cursor:pointer;color:#071426;background: linear-gradient(135deg, #ff7e5f,#feb47b);
@@ -75,15 +79,16 @@ a{text-decoration:none;color:inherit;}
 .btn-secondary{background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
 .btn-danger{background:#ff4444;color:#fff;}
 
-/* Bottom Navigation Buttons */
+/* Bottom Navigation as icons */
 .bottom-nav{
     position:fixed;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;
-    background:rgba(0,0,0,0.9);padding:10px 0;box-shadow:0 -2px 10px rgba(0,0,0,0.5);z-index:100;
+    background:rgba(0,0,0,0.9);padding:6px 0;box-shadow:0 -2px 10px rgba(0,0,0,0.5);z-index:100;
 }
 .bottom-nav button{
-    background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;border:none;border-radius:24px;
-    padding:10px 18px;font-weight:600;font-size:16px;cursor:pointer;flex:1;margin:0 5px;
+    background:transparent;color:#fff;border:none;display:flex;flex-direction:column;align-items:center;font-size:12px;
+    cursor:pointer;flex:1;
 }
+.bottom-nav button i{font-size:20px;margin-bottom:2px;}
 
 /* Creator Info at bottom of sidebar */
 .creator-info{
@@ -93,11 +98,10 @@ a{text-decoration:none;color:inherit;}
 /* Mobile Responsive */
 @media(max-width:480px){
  .hero-content h1{ font-size:28px;}
- .hero-content p{ font-size:16px; max-width:300px; margin-top:25vh;}
+ .hero-content p{ font-size:16px; max-width:300px; margin-top:30vh;}
  .btn{ padding:10px 18px; font-size:16px;}
  .buttons{flex-direction:column;}
- .bottom-nav button{font-size:14px;padding:8px 12px;}
- .sidebar{width:200px;padding-top:60px;}
+ .bottom-nav button i{font-size:18px;}
 }
 </style>
 </head>
@@ -121,13 +125,12 @@ a{text-decoration:none;color:inherit;}
       <button id="signOutBtn" class="btn-danger">Sign Out</button>
   </div>
   <div class="creator-info">
-      App created  by <br>
       Suraj S Hattarakal<br>
       Mobile: 8088975913<br>
       Email: suriisuraj8@gmail.com
-
   </div>
 </div>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -140,50 +143,54 @@ a{text-decoration:none;color:inherit;}
       Sign up and start your new journey!
     </p>
     <div class="buttons">
-      <button id="viewBtn" class="btn">View Course</button>
-      <button id="enrollBtn" class="btn-secondary">Enroll Now</button>
+      <button id="enrollBtn" class="btn-secondary">Get started</button>
     </div>
   </div>
 </section>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav">
-  <button onclick="location.href='index.html'">Home</button>
-  <button id="bottomCourseBtn">Course</button>
-  <button onclick="location.href='profile.html'">Profile</button>
+  <button onclick="location.href='index.html'"><i class="fa fa-home"></i>Home</button>
+  <button id="bottomCourseBtn"><i class="fa fa-book"></i>Course</button>
+  <button onclick="location.href='profile.html'"><i class="fa fa-user"></i>Profile</button>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script>
 // Sidebar toggle
-function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('show'); }
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('show');
+  document.getElementById('overlay').style.display=document.getElementById('sidebar').classList.contains('show')?'block':'none';
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('show');
+  document.getElementById('overlay').style.display='none';
+}
+
+// Settings submenu
 function toggleSettings(){ document.getElementById('settingsMenu').classList.toggle('show'); }
 function showFAQ(){ alert("FAQ:\n1. How to enroll?\n2. Payment methods?\n3. How to access courses?"); }
 
-// Share App
+// Share App via WhatsApp
 document.getElementById('shareBtn').addEventListener('click',()=>{
-  const url = encodeURIComponent(window.location.href);
-  const text = encodeURIComponent("Check out Teacher Learning Hub! Enhance your skills: " + url);
-  window.open(`https://wa.me/?text=${text}`, '_blank');
+  const url=encodeURIComponent(window.location.href);
+  const text=encodeURIComponent("Check out Teacher Learning Hub! Enhance your skills: "+url);
+  window.open(`https://wa.me/?text=${text}`,'_blank');
 });
 
-// User login
+// User login handling
 function getCurrentUser(){
   try{ return JSON.parse(localStorage.getItem('teacherHubUser')); } catch(e){ return null; }
 }
 function showUserStatus(){
-  const u = getCurrentUser();
-  const userArea = document.getElementById('userNameArea');
-  const signOutBtn = document.getElementById('signOutBtn');
+  const u=getCurrentUser();
+  const userArea=document.getElementById('userNameArea');
+  const signOutBtn=document.getElementById('signOutBtn');
   if(u && u.name){ userArea.textContent=`Welcome, ${u.name}`; signOutBtn.style.display='inline-block'; }
   else{ userArea.textContent=''; signOutBtn.style.display='none'; }
 }
-
-// Sign out
 document.getElementById('signOutBtn').addEventListener('click',()=>{
-  localStorage.removeItem('teacherHubUser');
-  showUserStatus();
-  alert('You have signed out');
-  location.href='index.html';
+  localStorage.removeItem('teacherHubUser'); showUserStatus(); alert('You have signed out'); location.href='index.html';
 });
 
 // Course buttons logic
@@ -196,5 +203,6 @@ document.getElementById('enrollBtn').addEventListener('click',()=>{ const u=getC
 
 document.addEventListener('DOMContentLoaded', showUserStatus);
 </script>
+
 </body>
 </html>
