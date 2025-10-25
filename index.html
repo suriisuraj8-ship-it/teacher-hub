@@ -131,6 +131,7 @@ a{text-decoration:none;color:inherit;}
       <button id="signOutBtn" class="btn-danger">Sign Out</button>
   </div>
   <div class="creator-info">
+    App Created by <br>
       Suraj S Hattarakal<br>
       Mobile: 8088975913<br>
       Email: suriisuraj8@gmail.com
@@ -149,17 +150,53 @@ a{text-decoration:none;color:inherit;}
       Sign up and start your new journey!
     </p>
     <div class="buttons">
-      <button id="viewBtn" class="btn">Get Started</button>
+      <button id="viewBtn" class="btn">Start Now</button>
     </div>
   </div>
 </section>
 
 <!-- Bottom Navigation just above phone nav buttons -->
 <div class="bottom-nav">
-  <button onclick="location.href='index.html'"><i class="fa fa-home"></i>Home</button>
-  <button id="bottomCourseBtn"><i class="fa fa-book"></i>Course</button>
-  <button onclick="location.href='profile.html'"><i class="fa fa-user"></i>Profile</button>
+  <button onclick="location.href='index.html'"><i class="fa fa-home"></i> Home</button>
+  <button id="bottomCourseBtn"><i class="fa fa-book"></i> Course</button>
+  <button onclick="location.href='profile.html'"><i class="fa fa-user"></i> Profile</button>
 </div>
+
+<style>
+.bottom-nav {
+  position: fixed;
+  bottom: 15px; /* adjusted so it stays above phone nav buttons */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  z-index: 100;
+}
+
+.bottom-nav button {
+  background-color: black;       /* black background */
+  color: white;                  /* white text */
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.bottom-nav button:hover {
+  background-color: #333;        /* darker black on hover */
+  transform: translateY(-2px);
+}
+
+.bottom-nav i {
+  font-size: 16px;
+}
+</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script>

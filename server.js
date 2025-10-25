@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
+  phone: { type: String, default: "" } // ✅ Added phone field
 });
 
 const User = mongoose.model("User", userSchema);
@@ -67,7 +68,10 @@ app.post("/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.json({ success: false, message: "Invalid credentials" });
 
-    res.json({ success: true, user: { name: user.name, email: user.email } });
+    res.json({
+      success: true,
+      user: { name: user.name, email: user.email, phone: user.phone || "" }
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: "Server error" });
@@ -92,6 +96,43 @@ app.post("/reset-password", async (req, res) => {
     await user.save();
 
     res.json({ success: true, message: "Password updated successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// --- ✅ Profile Update (Add or Edit Phone Number) ---
+app.post("/save-profile", async (req, res) => {
+  const { email, phone } = req.body;
+  if (!email || !phone)
+    return res.json({ success: false, message: "Email and phone required" });
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    user.phone = phone;
+    await user.save();
+
+    res.json({ success: true, message: "Profile updated successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// --- ✅ Fetch Profile (optional, to show phone next time) ---
+app.get("/get-profile/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    res.json({
+      success: true,
+      user: { name: user.name, email: user.email, phone: user.phone || "" }
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: "Server error" });
