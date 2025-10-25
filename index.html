@@ -2,75 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <title>Teacher Learning Hub</title>
-
 <style>
+/* Reset */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidden;}
-.nav{position:fixed;top:0;left:0;width:100%;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:100;}
+body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* Navigation Bar */
+.nav{
+    position:fixed;top:0;left:0;width:100%;height:60px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;z-index:100;background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(10px);
+}
 .hamburger{width:30px;height:3px;background:#fff;position:relative;cursor:pointer;}
-.hamburger::before,.hamburger::after{content:"";position:absolute;width:30px;height:3px;background:#fff;left:0;transition:0.3s;}
+.hamburger::before,.hamburger::after{
+    content:"";position:absolute;width:30px;height:3px;background:#fff;left:0;transition:0.3s;
+}
 .hamburger::before{top:-8px;} 
 .hamburger::after{top:8px;}
-.user-name{color:#ffd47a;font-weight:700;margin-right:12px;}
-.sidebar{position:fixed;top:0;left:-230px;width:230px;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transition:0.3s;z-index:99;}
-.sidebar.show{left:0;}
-.sidebar button{padding:10px 32px;font-size:18px;font-weight:600;border:none;border-radius:36px;cursor:pointer;background: linear-gradient(135deg,#ff7e5f,#feb47b);color:#071426;transition:0.2s;}
-.sidebar button.secondary{background: linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
+.user-name{color:#ffd47a;font-weight:700;margin-right:12px;font-size:16px;}
 
+/* Sidebar */
+.sidebar{
+    position:fixed;top:0;left:-260px;width:260px;height:100%;background:rgba(0,0,0,0.95);
+    display:flex;flex-direction:column;align-items:flex-start;padding:60px 20px;gap:18px;transition:0.3s;z-index:99;
+}
+.sidebar.show{left:0;}
+.sidebar button{
+    width:100%;padding:12px 20px;font-size:18px;font-weight:600;border:none;border-radius:36px;
+    cursor:pointer;background: linear-gradient(135deg,#ff7e5f,#feb47b);color:#071426;transition:0.2s;
+}
+.sidebar button.secondary{background: linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
+.sidebar .submenu{display:none;flex-direction:column;gap:12px;margin-left:10px;}
+.sidebar .submenu button{border-radius:24px;font-size:16px;padding:10px 18px;}
+.sidebar .submenu.show{display:flex;}
+
+/* Hero Section */
 .hero{
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    background-image: url('finalbackground.png'); /* image in same folder as HTML */
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 0 6%;
+    position:relative;
+    height:100vh;width:100%;
+    background-image:url('finalbackground.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:cover;
+    display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;
+    padding:0 6%;
     filter: brightness(1.15);
+    overflow:auto;
 }
 .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.25);z-index:1;}
-.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;gap:18px;align-items:flex-start;margin-top:55vh;}
-.hero-content h1{font-size:42px;font-weight:800;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;text-shadow:2px 2px 8px rgba(0,0,0,0.6);margin-bottom:8px;}
-.hero-content p{font-size:22px;color:#f0f8ff;line-height:1.5;max-width:800px;word-wrap:break-word;text-shadow:1px 1px 5px rgba(0,0,0,0.5);}
-.buttons{display:flex;gap:12px;margin-top:10px;}
-.btn{padding:12px 24px;font-size:18px;font-weight:700;border:none;border-radius:36px;cursor:pointer;color:#071426;background: linear-gradient(135deg, #ff7e5f,#feb47b);box-shadow:0 6px 18px rgba(0,0,0,0.4);transition: transform .2s ease, box-shadow .2s ease;}
+.hero-content{
+    position:relative;z-index:2;display:flex;flex-direction:column;gap:18px;align-items:flex-start;
+    margin-top:12%;
+}
+.hero-content h1{
+    font-size:36px;font-weight:800;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:2px 2px 8px rgba(0,0,0,0.6);
+}
+.hero-content p{
+    font-size:20px;color:#f0f8ff;line-height:1.5;max-width:800px;word-wrap:break-word;text-shadow:1px 1px 5px rgba(0,0,0,0.5);
+    margin-top:35vh;
+}
+.buttons{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.btn{
+    padding:12px 24px;font-size:18px;font-weight:700;border:none;border-radius:36px;
+    cursor:pointer;color:#071426;background: linear-gradient(135deg, #ff7e5f,#feb47b);
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);transition: transform .2s ease, box-shadow .2s ease;
+}
 .btn-secondary{background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
+.btn-danger{background:#ff4444;color:#fff;}
 
-.teacher-info{position:absolute;bottom:0;right:0;text-align:right;z-index:2;padding:12px 20px;border-radius:12px;}
-.teacher-info h2{font-size:28px;font-weight:900;margin-bottom:6px;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;text-shadow:2px 2px 6px rgba(0,0,0,0.5);}
-.teacher-info p{font-size:15px;font-weight:700;background: linear-gradient(120deg, #ff6a00, #ffb347, #ffd700, #ff4500);-webkit-background-clip: text;-webkit-text-fill-color: transparent;text-shadow:1px 1px 3px rgba(0,0,0,0.4);margin:0;}
-.about{background:#000;color:#ddd;padding:80px 6%;text-align:center;}
+/* Bottom Navigation Buttons */
+.bottom-nav{
+    position:fixed;bottom:0;left:0;width:100%;display:flex;justify-content:space-around;
+    background:rgba(0,0,0,0.9);padding:10px 0;box-shadow:0 -2px 10px rgba(0,0,0,0.5);z-index:100;
+}
+.bottom-nav button{
+    background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;border:none;border-radius:24px;
+    padding:10px 18px;font-weight:600;font-size:16px;cursor:pointer;flex:1;margin:0 5px;
+}
 
-@media (max-width:480px){
- .hero-content h1{ font-size:32px;}
- .hero-content p{ font-size:18px; max-width:300px;}
- .btn{ padding:10px 20px; font-size:16px;}
- .teacher-info h2{ font-size:24px;}
- .teacher-info p{ font-size:13px;}
- .teacher-info{ bottom:0; right:0; padding:10px 14px;}
- .about h3{ font-size:28px;}
- .about p{ font-size:18px; }
+/* Creator Info at bottom of sidebar */
+.creator-info{
+    margin-top:auto;color:#ffd47a;font-size:14px;line-height:1.4;
+}
+
+/* Mobile Responsive */
+@media(max-width:480px){
+ .hero-content h1{ font-size:28px;}
+ .hero-content p{ font-size:16px; max-width:300px; margin-top:25vh;}
+ .btn{ padding:10px 18px; font-size:16px;}
  .buttons{flex-direction:column;}
+ .bottom-nav button{font-size:14px;padding:8px 12px;}
+ .sidebar{width:200px;padding-top:60px;}
 }
 </style>
 </head>
 <body>
+
+<!-- Navigation Bar -->
 <div class="nav">
   <div class="hamburger" onclick="toggleSidebar()"></div>
   <div id="userNameArea" class="user-name"></div>
 </div>
 
+<!-- Sidebar -->
 <div class="sidebar" id="sidebar">
-  <button onclick="location.href='register.html'">Sign Up</button>
-  <button class="secondary" onclick="location.href='login.html'">Sign In</button>
+  <button onclick="location.href='index.html'">Home</button>
+  <button id="courseBtn">Course</button>
+  <button onclick="location.href='profile.html'">Profile</button>
+  <button onclick="toggleSettings()">Settings ▾</button>
+  <div class="submenu" id="settingsMenu">
+      <button onclick="showFAQ()">FAQ</button>
+      <button id="shareBtn">Share App</button>
+      <button id="signOutBtn" class="btn-danger">Sign Out</button>
+  </div>
+  <div class="creator-info">
+      App created  by <br>
+      Suraj S Hattarakal<br>
+      Mobile: 8088975913<br>
+      Email: suriisuraj8@gmail.com
+
+  </div>
 </div>
 
+<!-- Hero Section -->
 <section class="hero">
   <div class="hero-content">
     <h1>Start your digital journey here</h1>
@@ -82,88 +141,60 @@ body{font-family:'Poppins',sans-serif;background:#000;color:#fff;overflow-x:hidd
     </p>
     <div class="buttons">
       <button id="viewBtn" class="btn">View Course</button>
-      <button id="enrollBtn" class="btn">Enroll Now</button>
-      <button id="signOutBtn" class="btn" style="display:none;background:#ff4444;color:#fff;">Sign Out</button>
+      <button id="enrollBtn" class="btn-secondary">Enroll Now</button>
     </div>
   </div>
-
-  <div class="teacher-info">
-    <h2>Bagesh Hugar</h2>
-    <p>MSc in Computer Science</p>
-  </div>
 </section>
 
-<section class="about">
-  <h3>About Teacher Hub</h3>
-  <p>Teacher Hub is an online platform where students can access structured learning materials, watch lessons, and download notes after successful payment. This site is owned and operated by Surii Suraj for educational purposes.</p>
-</section>
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <button onclick="location.href='index.html'">Home</button>
+  <button id="bottomCourseBtn">Course</button>
+  <button onclick="location.href='profile.html'">Profile</button>
+</div>
 
 <script>
+// Sidebar toggle
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('show'); }
+function toggleSettings(){ document.getElementById('settingsMenu').classList.toggle('show'); }
+function showFAQ(){ alert("FAQ:\n1. How to enroll?\n2. Payment methods?\n3. How to access courses?"); }
 
+// Share App
+document.getElementById('shareBtn').addEventListener('click',()=>{
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent("Check out Teacher Learning Hub! Enhance your skills: " + url);
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+});
+
+// User login
 function getCurrentUser(){
-  try {
-    const raw = localStorage.getItem('teacherHubUser');
-    if(!raw) return null;
-    return JSON.parse(raw);
-  } catch(e) { return null; }
+  try{ return JSON.parse(localStorage.getItem('teacherHubUser')); } catch(e){ return null; }
 }
-
 function showUserStatus(){
   const u = getCurrentUser();
-  const enroll = document.getElementById('enrollBtn');
-  const view = document.getElementById('viewBtn');
-  const signOut = document.getElementById('signOutBtn');
   const userArea = document.getElementById('userNameArea');
-
-  if(u && u.name){
-    userArea.textContent = `Welcome, ${u.name}`;
-    enroll.style.display = 'none';
-    view.style.display = 'inline-block';
-    signOut.style.display = 'inline-block';
-  } else {
-    userArea.textContent = '';
-    enroll.style.display = 'inline-block';
-    view.style.display = 'inline-block';
-    signOut.style.display = 'none';
-  }
+  const signOutBtn = document.getElementById('signOutBtn');
+  if(u && u.name){ userArea.textContent=`Welcome, ${u.name}`; signOutBtn.style.display='inline-block'; }
+  else{ userArea.textContent=''; signOutBtn.style.display='none'; }
 }
 
-document.getElementById('viewBtn').addEventListener('click', () => {
-  const u = getCurrentUser();
-  if(u && u.email){
-    location.href = 'course.html';
-  } else {
-    location.href = 'login.html';
-  }
-});
-
-document.getElementById('enrollBtn').addEventListener('click', () => {
-  const u = getCurrentUser();
-  if(u && u.email){
-    alert('You are already logged in — click View Course to continue.');
-  } else {
-    location.href = 'register.html';
-  }
-});
-
-document.getElementById('signOutBtn').addEventListener('click', () => {
+// Sign out
+document.getElementById('signOutBtn').addEventListener('click',()=>{
   localStorage.removeItem('teacherHubUser');
   showUserStatus();
   alert('You have signed out');
+  location.href='index.html';
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  showUserStatus();
-});
+// Course buttons logic
+document.getElementById('courseBtn').addEventListener('click',()=>{ const u=getCurrentUser(); if(u&&u.email) location.href='course.html'; else location.href='register.html'; });
+document.getElementById('bottomCourseBtn').addEventListener('click',()=>{ const u=getCurrentUser(); if(u&&u.email) location.href='course.html'; else location.href='register.html'; });
 
-// Always return to index.html on back navigation
-if (window.history && window.history.pushState) {
-  window.history.pushState(null, null, window.location.href);
-  window.onpopstate = function () {
-    window.location.href = 'index.html';
-  };
-}
+// View and Enroll buttons
+document.getElementById('viewBtn').addEventListener('click',()=>{ const u=getCurrentUser(); if(u&&u.email) location.href='course.html'; else location.href='register.html'; });
+document.getElementById('enrollBtn').addEventListener('click',()=>{ const u=getCurrentUser(); if(u&&u.email) alert('You are already logged in — click View Course.'); else location.href='register.html'; });
+
+document.addEventListener('DOMContentLoaded', showUserStatus);
 </script>
 </body>
 </html>
