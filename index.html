@@ -79,12 +79,12 @@ a{text-decoration:none;color:inherit;}
 .btn-secondary{background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
 .btn-danger{background:#ff4444;color:#fff;}
 
-/* Bottom Navigation as icons just below Get Started button */
+/* Bottom Navigation just above phone nav buttons */
 .bottom-nav{
-    position:absolute; /* below hero content */
+    position:fixed; /* fixed near bottom of screen */
+    bottom:50px; /* ~1.5-2 cm above phone nav buttons (adjust if needed) */
     left:50%;
     transform:translateX(-50%);
-    top:calc(50% + 50vh + 37px); /* paragraph + 1cm gap (~37px) */
     display:flex;
     justify-content:space-around;
     width:90%;
@@ -154,7 +154,7 @@ a{text-decoration:none;color:inherit;}
   </div>
 </section>
 
-<!-- Bottom Navigation just below Get Started -->
+<!-- Bottom Navigation just above phone nav buttons -->
 <div class="bottom-nav">
   <button onclick="location.href='index.html'"><i class="fa fa-home"></i>Home</button>
   <button id="bottomCourseBtn"><i class="fa fa-book"></i>Course</button>
