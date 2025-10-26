@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | Tech Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <img src="finalbackground.png" alt="Loading...">
+
+  <script>
+    // Show splash only on first visit
+    if (!sessionStorage.getItem("visited")) {
+      setTimeout(() => {
+        sessionStorage.setItem("visited", "true");
+        window.location.href = "index.html";
+      }, 4000); // 4 seconds
+    } else {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
