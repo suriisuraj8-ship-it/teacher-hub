@@ -88,16 +88,33 @@ body {
   line-height:1.5;
   font-size:15px;
 }
-
 .teacher {
-  position:absolute;
-  right:15px;
-  bottom:12px;
-  font-size:15px;
-  color:#00ffb3;
-  font-weight:500;
-  text-shadow:0 0 8px rgba(0,255,179,0.5);
+  position: absolute;
+  right: 0; /* fully to the right edge */
+  bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* align everything to the right */
+  text-align: right;
+  color: #00ffb3;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(0,255,179,0.6);
+  padding-right: 10px; /* small padding for breathing space */
 }
+
+.teacher img {
+  width: 70px;  /* decreased from 100px */
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.4);
+  box-shadow: 0 0 15px rgba(0,255,179,0.5);
+  margin-bottom: 5px;
+}
+
+
+
 
 /* ---------- RESPONSIVE ---------- */
 @media(min-width:700px){
@@ -105,6 +122,8 @@ body {
     grid-template-columns:repeat(2,1fr);
   }
 }
+</style>
+
 </style>
 </head>
 <body>
@@ -115,44 +134,44 @@ body {
 <div class="course-list">
   <div class="course" onclick="openLesson('c')">
     <h3>💻 C Language</h3>
-    <p>Learn programming basics and logic building using C language.</p>
-    <div class="teacher">— Prof. Bhagesh Hugar</div>
+    <p>Learn basics and logic building using C language.</p>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 
   <div class="course" onclick="openLesson('cpp')">
     <h3>⚙️ C++ Programming</h3>
     <p>Master Object-Oriented concepts and projects using C++.</p>
-    <div class="teacher">— Prof. Bhagesh Hugar</div>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 
   <div class="course" onclick="openLesson('java')">
     <h3>☕ Java</h3>
-    <p>Develop Android and desktop applications with Java language.</p>
-    <div class="teacher">— Prof. Bhagesh Hugar</div>
+    <p>Develop Android & desktop applications with Java language.</p>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 
   <div class="course" onclick="openLesson('python')">
     <h3>🐍 Python</h3>
     <p>Learn Python for automation, AI, and web applications.</p>
-    <div class="teacher">— Prof. Bhagesh Hugar</div>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 
   <div class="course" onclick="openLesson('tally')">
     <h3>📊 Tally</h3>
-    <p>Understand accounting, GST, and business management in Tally.</p>
-    <div class="teacher">—Prof. Bhagesh Hugar</div>
+    <p>GST, and business management in Tally.</p>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 
   <div class="course" onclick="openLesson('bcs')">
     <h3>🧠 BCS</h3>
     <p>Strengthen your theoretical knowledge in computer science.</p>
-    <div class="teacher">—Prof. Bhagesh Hugar</div>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 
   <div class="course" onclick="openLesson('pgdca')">
     <h3>🖥️ PGDCA</h3>
     <p>Get professional skills in computer applications with PGDCA.</p>
-    <div class="teacher">— Prof. Bhagesh Hugar</div>
+    <div class="teacher">— Prof. Bhagesh Hugar <img src="logo.png" alt="Prof Logo"></div>
   </div>
 </div>
 
