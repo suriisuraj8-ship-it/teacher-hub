@@ -7,41 +7,51 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidden;}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#0f0f0f,#1b1b1b,#111);
+  color:#fff;
+  overflow-x:hidden;
+}
 
 /* Navigation Bar */
 .nav{
-    position:fixed;top:0;left:0;width:100%;height:60px;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 20px;z-index:100;background:rgba(0,0,0,0.85);
-    backdrop-filter:blur(10px);
+  position:fixed;top:0;left:0;width:100%;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;z-index:100;background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
 }
 .hamburger{width:30px;height:3px;background:#fff;position:relative;cursor:pointer;}
 .hamburger::before,.hamburger::after{
-    content:"";position:absolute;width:30px;height:3px;background:#fff;left:0;transition:0.3s;
+  content:"";position:absolute;width:30px;height:3px;background:#fff;left:0;transition:0.3s;
 }
 .hamburger::before{top:-8px;} 
 .hamburger::after{top:8px;}
 .user-area{display:flex;align-items:center;gap:12px;}
 .user-name{color:#ffd47a;font-weight:700;font-size:16px;}
-#joinBtn{padding:6px 14px;background:linear-gradient(135deg,#ff7e5f,#feb47b);border:none;border-radius:20px;color:#000;font-weight:700;cursor:pointer;}
+#joinBtn{
+  padding:6px 14px;background:linear-gradient(135deg,#ff7e5f,#feb47b);
+  border:none;border-radius:20px;color:#000;font-weight:700;cursor:pointer;
+}
 
 /* Sidebar */
 .sidebar{
-    position:fixed;top:0;left:-260px;width:260px;height:100%;background:rgba(0,0,0,0.95);
-    display:flex;flex-direction:column;align-items:flex-start;padding:60px 20px;gap:18px;transition:0.3s;z-index:99;
+  position:fixed;top:0;left:-260px;width:260px;height:100%;
+  background:rgba(0,0,0,0.95);
+  display:flex;flex-direction:column;align-items:flex-start;
+  padding:60px 20px;gap:18px;transition:0.3s;z-index:99;
 }
 .sidebar.show{left:0;}
 .sidebar button{
-    width:100%;padding:12px 20px;font-size:18px;font-weight:600;border:none;border-radius:36px;
-    cursor:pointer;background: linear-gradient(135deg,#ff7e5f,#feb47b);color:#071426;transition:0.2s;
+  width:100%;padding:12px 20px;font-size:18px;font-weight:600;border:none;border-radius:36px;
+  cursor:pointer;background:linear-gradient(135deg,#ff7e5f,#feb47b);color:#071426;transition:0.2s;
 }
-.sidebar button.secondary{background: linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
+.sidebar button.secondary{background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;}
 .sidebar .submenu{display:none;flex-direction:column;gap:12px;margin-left:10px;}
 .sidebar .submenu button{border-radius:24px;font-size:16px;padding:10px 18px;}
 .sidebar .submenu.show{display:flex;}
 .sidebar-overlay{
-    display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:98;
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:98;
 }
 
 /* Slideshow */
@@ -49,7 +59,7 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
   margin-top:70px;
   width:90%;
   max-width:1000px;
-  height:200px;
+  height:220px;
   overflow:hidden;
   border-radius:18px;
   margin-left:auto;
@@ -59,11 +69,12 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
 }
 .slideshow img {
   width:100%;
-  height:200px;
+  height:220px;
   object-fit:cover;
   position:absolute;
   opacity:0;
   transition:opacity 1s ease-in-out;
+  border-radius:18px;
 }
 .slideshow img.active {opacity:1;}
 
@@ -72,7 +83,7 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
   gap:18px;
-  padding:20px 8%;
+  padding:25px 8%;
 }
 .feature-box {
   background:#111;
@@ -82,6 +93,7 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
   text-align:center;
   transition:transform 0.3s;
   cursor:pointer;
+  box-shadow:0 0 8px rgba(255,255,255,0.1);
 }
 .feature-box:hover {transform:translateY(-5px);}
 .feature-box i {font-size:26px;color:#ffb347;margin-bottom:10px;}
@@ -91,43 +103,51 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
 /* YouTube Popup */
 #ytPopup {
   display:none;
-  position:fixed;top:50%;left:50%;
+  position:fixed;
+  top:50%;left:50%;
   transform:translate(-50%, -50%);
   background:#000;
   padding:10px;
   border-radius:16px;
   z-index:200;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
-#ytPopup iframe {width:300px; height:170px;}
+#ytPopup iframe {
+  width:90vw;
+  max-width:360px;
+  height:200px;
+  border:none;
+  border-radius:12px;
+}
 #ytPopupClose {
-  position:absolute; top:-12px; right:-12px;
+  position:absolute; top:6px; right:6px;
   background:#ff4444; color:#fff;
   border:none; border-radius:50%; width:28px; height:28px; cursor:pointer;
 }
 
 /* Bottom Navigation */
 .bottom-nav{
-    position:fixed;
-    bottom:15px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    z-index:100;
+  position:fixed;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  z-index:100;
 }
 .bottom-nav button{
-    background-color:black;color:white;border:none;
-    padding:12px 18px;border-radius:10px;font-size:14px;
-    display:flex;align-items:center;gap:6px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.3);
-    transition:background 0.3s,transform 0.2s;
+  background-color:black;color:white;border:none;
+  padding:12px 18px;border-radius:10px;font-size:14px;
+  display:flex;align-items:center;gap:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.3);
+  transition:background 0.3s,transform 0.2s;
 }
 .bottom-nav button:hover{background-color:#333;transform:translateY(-2px);}
 .bottom-nav i{font-size:16px;}
-
 </style>
 </head>
+
 <body>
 
 <!-- Navigation Bar -->
@@ -164,6 +184,12 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
   <img src="slide1.jpg" class="active" alt="">
   <img src="slide2.jpg" alt="">
   <img src="slide3.jpg" alt="">
+  <img src="slide4.jpg" alt="">
+  <img src="slide5.jpg" alt="">
+  <img src="slide6.jpg" alt="">
+  <img src="slide7.jpg" alt="">
+  <img src="slide8.jpg" alt="">
+  <img src="slide9.jpg" alt="">
 </div>
 
 <!-- Features Section -->
@@ -188,7 +214,7 @@ body{font-family:'Poppins',sans-serif;background:#111;color:#fff;overflow-x:hidd
 <!-- YouTube Popup -->
 <div id="ytPopup">
   <button id="ytPopupClose" onclick="closeYT()">×</button>
-  <iframe id="ytFrame" src="" frameborder="0" allowfullscreen></iframe>
+  <iframe id="ytFrame" src="" allowfullscreen></iframe>
 </div>
 
 <!-- Bottom Navigation -->
@@ -212,7 +238,7 @@ function closeSidebar(){
 function toggleSettings(){ document.getElementById('settingsMenu').classList.toggle('show'); }
 function showFAQ(){ alert("FAQ:\n1. How to enroll?\n2. Payment methods?\n3. How to access courses?"); }
 
-// Share App via WhatsApp
+// Share App
 document.getElementById('shareBtn').addEventListener('click',()=>{
   const url=encodeURIComponent(window.location.href);
   const text=encodeURIComponent("Check out Teacher Learning Hub! "+url);
@@ -229,7 +255,10 @@ function showUserStatus(){
   else{ userArea.textContent=''; signOutBtn.style.display='none'; }
 }
 document.getElementById('signOutBtn').addEventListener('click',()=>{
-  localStorage.removeItem('teacherHubUser'); showUserStatus(); alert('You have signed out'); location.href='index.html';
+  localStorage.removeItem('teacherHubUser');
+  showUserStatus();
+  alert('You have signed out');
+  location.href='index.html';
 });
 
 // Course buttons
@@ -245,12 +274,12 @@ setInterval(()=>{
   slides[current].classList.remove("active");
   current=(current+1)%slides.length;
   slides[current].classList.add("active");
-},4000);
+},2500);
 
 // YouTube Popup
 function openYT(){
   const iframe=document.getElementById('ytFrame');
-  iframe.src="https://www.youtube.com/embed/your_video_id"; // Replace your_video_id
+  iframe.src="https://www.youtube.com/embed/your_video_id"; // 🔁 Replace your_video_id
   document.getElementById('ytPopup').style.display='block';
 }
 function closeYT(){
