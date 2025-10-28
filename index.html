@@ -136,16 +136,49 @@ body{
   gap:15px;
   z-index:100;
 }
-.bottom-nav{
-  position:fixed;
-  bottom:90px; /* ⬆️ moved 30px higher */
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  z-index:100;
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 15px;
+  border-radius: 40px; /* Oval background container */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  z-index: 100;
 }
+
+.bottom-nav button {
+  flex: 1;
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  color: #fff;
+  border: none;
+  border-radius: 25px; /* Oval buttons */
+  padding: 10px 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.bottom-nav button:hover {
+  background: linear-gradient(135deg, #333, #555);
+  transform: translateY(-3px);
+}
+
+.bottom-nav i {
+  font-size: 16px;
+}
+
 
 .bottom-nav button:hover{background-color:#333;transform:translateY(-2px);}
 .bottom-nav i{font-size:16px;}
