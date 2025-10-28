@@ -194,21 +194,211 @@ body{
 
 <!-- Features Section -->
 <section class="features">
-  <div class="feature-box" onclick="openYT()">
-    <i class="fa fa-play-circle"></i>
-    <h3>Welcome Tutorial Video</h3>
-    <p>Click to watch tutorial inside the homepage.</p>
-  </div>
-  <div class="feature-box">
-    <i class="fa fa-chalkboard-teacher"></i>
-    <h3>Expert Teachers</h3>
-    <p>Guidance from industry professionals with hands-on experience.</p>
-  </div>
-  <div class="feature-box">
-    <i class="fa fa-certificate"></i>
-    <h3>Certifications</h3>
-    <p>Earn digital certificates to showcase your new skills.</p>
-  </div>
+<div class="feature-box yt-box" onclick="openYT()">
+  <i class="fa fa-play-circle"></i>
+  <h3>Welcome Tutorial Video</h3>
+  <p>Click to watch tutorial inside the homepage.</p>
+</div>
+
+<style>
+/* Default box styling */
+.feature-box {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* YouTube red theme box */
+.feature-box.yt-box {
+  background: linear-gradient(135deg, #ff0000, #cc0000) !important;
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
+}
+
+.feature-box.yt-box i {
+  font-size: 45px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.7);
+}
+
+.feature-box.yt-box h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.feature-box.yt-box p {
+  color: #ffeaea;
+  font-size: 15px;
+}
+
+.feature-box.yt-box:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 40px rgba(255, 30, 30, 0.9);
+  background: linear-gradient(135deg, #ff1a1a, #990000);
+}
+
+/* Shine animation */
+.feature-box.yt-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+  transform: skewX(-25deg);
+}
+
+.feature-box.yt-box:hover::before {
+  left: 150%;
+  transition: left 0.8s ease;
+}
+</style>
+
+<script>
+function openYT(){
+  alert("🎥 Opening YouTube tutorial (embed will be added here)");
+}
+</script>
+
+  <div class="feature-box special cert-box">
+  <i class="fa fa-chalkboard-teacher"></i>
+  <h3>Certifications</h3>
+  <p>Earn digital certificates to showcase your new skills.</p>
+</div>
+
+<style>
+.feature-box {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.feature-box i {
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* 🔹 Base style for "special" glowing boxes */
+.feature-box.special {
+  border: 2px solid rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,198,255,0.6);
+  text-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+
+/* ✴️ Courses box (blue gradient) */
+.feature-box.special:not(.cert-box) {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+/* 🟢 Certifications box (green gradient) */
+.feature-box.cert-box {
+  background: linear-gradient(135deg, #00ff9d, #00b36b);
+  box-shadow: 0 0 25px rgba(0,255,179,0.6);
+}
+
+.feature-box.special:hover {
+  transform: scale(1.05);
+}
+
+.feature-box.special::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+  transform: skewX(-25deg);
+}
+
+.feature-box.special:hover::before {
+  left: 125%;
+  transition: left 0.8s ease;
+}
+</style>
+
+ <div class="feature-box special" onclick="window.location.href='course.html'">
+  <i class="fa fa-graduation-cap"></i>
+  <h3>All Computer Courses</h3>
+  <p>Standard Notes, simple and easy-to-understand classes.</p>
+</div>
+
+<style>
+.feature-box {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.feature-box i {
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* 🔥 Style only this specific button */
+.feature-box.special {
+  background: linear-gradient(135deg, #51622d, #094117);
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 20px rgba(0,198,255,0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-box.special::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+  transform: skewX(-25deg);
+}
+
+.feature-box.special:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0,234,255,0.9);
+}
+
+.feature-box.special:hover::before {
+  left: 125%;
+  transition: left 0.8s ease;
+}
+</style>
+
 </section>
 
 <!-- YouTube Popup -->
