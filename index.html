@@ -136,13 +136,17 @@ body{
   gap:15px;
   z-index:100;
 }
-.bottom-nav button{
-  background-color:black;color:white;border:none;
-  padding:12px 18px;border-radius:10px;font-size:14px;
-  display:flex;align-items:center;gap:6px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.3);
-  transition:background 0.3s,transform 0.2s;
+.bottom-nav{
+  position:fixed;
+  bottom:90px; /* ⬆️ moved 30px higher */
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  z-index:100;
 }
+
 .bottom-nav button:hover{background-color:#333;transform:translateY(-2px);}
 .bottom-nav i{font-size:16px;}
 </style>
